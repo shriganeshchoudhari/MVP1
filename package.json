@@ -1,0 +1,23 @@
+{
+  "name": "mvp1",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "HDFC Xpress BizFinance — Playwright E2E Tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --env-file .env.uat node_modules/.bin/playwright test",
+    "test:uat": "node --env-file .env.uat node_modules/.bin/playwright test",
+    "test:sit": "node --env-file .env.sit node_modules/.bin/playwright test",
+    "test:headless": "node --env-file .env.uat node_modules/.bin/playwright test --env HEADLESS=true",
+    "test:login": "node --env-file .env.uat node_modules/.bin/playwright test tests/login.spec.js",
+    "report": "npx playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.3.3",
+    "dotenv": "^17.3.1"
+  }
+}
