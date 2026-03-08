@@ -142,6 +142,13 @@ test.describe('OTP Page', () => {
         const isOtpVisible = await otpPage.otpInputs.first().isVisible().catch(() => false);
         expect(isOtpVisible).toBe(true);
     });
+
+    // O-06
+    test('should show Resend OTP link on OTP page', async ({ page }) => {
+        const otpPage = new OtpPage(page);
+        // The resend link must be present in the DOM (may be disabled during countdown)
+        await expect(otpPage.resendOtpLink).toBeVisible({ timeout: 10_000 });
+    });
 });
 
 // ─── End-to-End Full Login Flow ───────────────────────────────────────────────

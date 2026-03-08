@@ -18,6 +18,14 @@ export class OtpPage {
         await this.otpInputs.first().waitFor({ state: 'visible', timeout: 15_000 });
     }
 
+    /**
+     * Fill OTP sequentially.
+     * Alias: enterOtp() — both names work so enterAndSubmitOtp() resolves correctly.
+     */
+    async enterOtp(otp) {
+        return this.fillOtp(otp);
+    }
+
     /** Fill OTP sequentially */
     async fillOtp(otpCode) {
         const count = await this.otpInputs.count();
@@ -45,7 +53,26 @@ export class OtpPage {
      */
     async enterAndSubmitOtp(otp) {
         await this.waitForOtpPage();
-        await this.enterOtp(otp);
+        await this.fillOtp(otp);
         await this.submitOtp();
+    }
+
+    /**
+     * Wait for the resend OTP link/button to become enabled and click it.
+     * The portal enables it after a countdown timer expires.
+     * @param {number} timeout  max ms to wait (default 90s — typical OTP timer)
+     */
+    async clickResendOtp(timeout = 90_000) {
+        await this.resendOtpLink.waitFor({ state: 'visible', timeout });
+        // Wait until it is not disabled (some portals grey it out during countdown)
+        await this.page.waitForFunction(
+            (sel) => {
+                const el = document.querySelector(sel);
+                return el && !el.disabled && !el.classList.contains('disabled');
+            },
+            'span[class*="resend"], a[class*="resend"], button[class*="resend"]',
+            { timeout }
+        ).catch(() => { /* ignore — element may not have disabled attr */ });
+        await this.resendOtpLink.click();
     }
 }

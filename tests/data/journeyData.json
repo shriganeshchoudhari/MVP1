@@ -1,0 +1,282 @@
+[
+    {
+        "testName": "High Value BBG - Manufacturing",
+        "mobileNumber": "8990909090",
+        "businessSegment": "BBG",
+        "customerGridId": "205981",
+        "panNumber": "AHMPA1234a",
+        "companyName": "Ganesh solutions",
+        "companyPincode": "400033",
+        "sector": "Service",
+        "facility1": {
+            "type": "Cash Credit",
+            "purpose": "TERM LOAN FOR CAPITAL",
+            "amount": "10,00,0000"
+        },
+        "facility2": {
+            "type": "Term Loan",
+            "purpose": "TERM LOAN FOR WORKING CAPITAL",
+            "amount": "2,00,0000",
+            "tenure": "60"
+        },
+        "demographics": {
+            "email": "ganeshsolutions@m.com",
+            "industry": "EDUCATION SERVICE",
+            "subIndustry": "-HIGHER EDUCATION",
+            "dateOfIncorporation": "02-02-2000"
+        },
+        "address": {
+            "line1": "add1",
+            "line2": "add2",
+            "line3": "add3",
+            "line4": "local",
+            "line5": "mark",
+            "pincode": "400033",
+            "occupancy": "Leased"
+        },
+        "applicant": {
+            "firstName": "RAMankant",
+            "middleName": "MANOHAR",
+            "email": "ram@m.com",
+            "maritalStatus": "Married",
+            "spouseName": "sita ram lohia",
+            "fatherName": "sham kanha lohia",
+            "motherName": "mina sham lohia",
+            "religion": "HINDU",
+            "caste": "SC",
+            "occupation": "Salaried",
+            "employerName": "MADAN insdustry",
+            "employmentDuration": "22",
+            "orgType": "LIMITED LIABILITY PARTNERSHIP"
+        },
+        "psl": {
+            "category": "PSL SMALL SERVICE ENTERPRISES",
+            "subCategory": "MANUFACTURING ENTP- SMALL"
+        },
+        "history": {
+            "description": "business background description provided by data payload..."
+        },
+        "financials": {
+            "securedLoan": "2,00,0000",
+            "termLoan": "3,00,0000",
+            "totalProjectedSales": "4,00,0000",
+            "caNumber": "CA1234",
+            "caName": "shrikant jadhav",
+            "udinNo": "UDIN89889"
+        },
+        "gst": {
+            "monthlySales": [
+                "20,0000",
+                "30,0000",
+                "40,0000",
+                "50,0000",
+                "60,0000",
+                "70,0000",
+                "80,0000",
+                "90,0000",
+                "1,00,0000",
+                "1,10,0000",
+                "1,20,0000",
+                "1,30,0000"
+            ]
+        },
+        "bankStatement": {
+            "bankName": "HDFC Bank",
+            "accountNumber": "1234567890",
+            "existingOD": "Yes",
+            "limit": "200000",
+            "method": "manual"
+        },
+        "takeOver": {
+            "type": "Buyers Credit",
+            "ifscCode": "HDFC0000771",
+            "bankAccountNumber": "LOAN909090090",
+            "loanAmount": "2,00,0000",
+            "email": "tk@hdfc.com"
+        },
+        "security": {
+            "type": "Plant & Machinery",
+            "year": "2013",
+            "address": {
+                "line1": "add1",
+                "line2": "add2",
+                "line3": "add3",
+                "line4": "local",
+                "line5": "mark",
+                "pincode": "400001"
+            },
+            "collateralValue": "6,85,0000",
+            "otherValue": "200000"
+        },
+        "udyam": {
+            "number": "UDYAM-MH-33-0012345",
+            "skip": true
+        },
+        "itrAndPL": {
+            "uploadBalanceSheet": true,
+            "uploadPL": true,
+            "uploadITR": true,
+            "confirmCheckbox": true
+        },
+        "takeOver2": {
+            "from": "NBFC",
+            "nbfcName": "Bajaj Finance",
+            "city": "Mumbai",
+            "email": "nbfc@example.com",
+            "bankAccountNumber": "NBFC12345678",
+            "loanAmount": "1,00,0000"
+        },
+        "secondApplicant": {
+            "type": "Entity",
+            "mobileNumber": "9898989898",
+            "panNumber": "BBBPS1234B",
+            "businessName": "ABC Enterprises",
+            "industry": "MANUFACTURING",
+            "subIndustry": "-SMALL MANUFACTURING",
+            "dateOfIncorporation": "01-01-2010",
+            "email": "abc@example.com",
+            "relation": "GUARANTOR",
+            "address": {
+                "line1": "123 Industrial Area",
+                "line2": "Andheri",
+                "line3": "Mumbai",
+                "line4": "Andheri West",
+                "line5": "Near Station",
+                "pincode": "400053"
+            },
+            "occupancy": "Rented",
+            "applicantType": "GUARANTOR"
+        },
+        "sourcing": {
+            "branch": "14 - JALANDHAR",
+            "branchSearch": "jalandhar",
+            "ccpa": "EURE2348 - Yashraj Lavaniyna",
+            "ccpaSearch": "EURE2348"
+        },
+        "docs": {
+            "consentForm": "tests/fixtures/consent_form.png",
+            "personalDocument": "tests/fixtures/personal_doc.png"
+        }
+    },
+    {
+        "testName": "High Value BBG - Service Sector",
+        "mobileNumber": "9876543210",
+        "businessSegment": "BBG",
+        "customerGridId": "305982",
+        "panNumber": "BCEPS5678B",
+        "companyName": "TechServe Solutions",
+        "companyPincode": "400070",
+        "sector": "Service",
+        "facility1": {
+            "type": "Cash Credit",
+            "purpose": "TERM LOAN FOR WORKING CAPITAL",
+            "amount": "5,00,0000"
+        },
+        "facility2": {
+            "type": "Term Loan",
+            "purpose": "TERM LOAN FOR CAPITAL",
+            "amount": "1,00,0000",
+            "tenure": "36"
+        },
+        "demographics": {
+            "email": "techserve@example.com",
+            "industry": "INFORMATION TECHNOLOGY",
+            "subIndustry": "-SOFTWARE SERVICES",
+            "dateOfIncorporation": "15-06-2010"
+        },
+        "address": {
+            "line1": "Plot 22",
+            "line2": "MIDC Andheri",
+            "line3": "Andheri East",
+            "line4": "Andheri",
+            "line5": "Near WEH Metro",
+            "pincode": "400070",
+            "occupancy": "Rented"
+        },
+        "applicant": {
+            "firstName": "SURESH",
+            "middleName": "KUMAR",
+            "email": "suresh@techserve.com",
+            "maritalStatus": "Single",
+            "spouseName": "",
+            "fatherName": "RAMESH KUMAR",
+            "motherName": "SUNITA KUMAR",
+            "religion": "HINDU",
+            "caste": "OBC",
+            "occupation": "Self-Employed",
+            "employerName": "TechServe Solutions",
+            "employmentDuration": "10",
+            "orgType": "PRIVATE LIMITED COMPANY"
+        },
+        "psl": {
+            "category": "PSL SMALL SERVICE ENTERPRISES",
+            "subCategory": "SERVICE ENTP- SMALL"
+        },
+        "history": {
+            "description": "IT services company established in 2010 specializing in software development and consulting."
+        },
+        "financials": {
+            "securedLoan": "1,00,0000",
+            "termLoan": "2,00,0000",
+            "totalProjectedSales": "8,00,0000",
+            "caNumber": "CA5678",
+            "caName": "Pradeep Sharma",
+            "udinNo": "UDIN12345"
+        },
+        "gst": {
+            "monthlySales": [
+                "15,0000", "18,0000", "20,0000", "22,0000",
+                "25,0000", "28,0000", "30,0000", "32,0000",
+                "35,0000", "38,0000", "40,0000", "42,0000"
+            ]
+        },
+        "bankStatement": {
+            "bankName": "ICICI Bank",
+            "accountNumber": "0987654321",
+            "existingOD": "No",
+            "limit": "",
+            "method": "manual"
+        },
+        "takeOver": {
+            "type": "Term Loan",
+            "ifscCode": "ICIC0001234",
+            "bankAccountNumber": "LOAN123456",
+            "loanAmount": "1,00,0000",
+            "email": "takeover@example.com"
+        },
+        "security": {
+            "type": "Office Property",
+            "year": "2015",
+            "address": {
+                "line1": "Plot 22",
+                "line2": "MIDC Andheri",
+                "line3": "Andheri East",
+                "line4": "Andheri",
+                "line5": "Near WEH Metro",
+                "pincode": "400070"
+            },
+            "collateralValue": "4,00,0000",
+            "otherValue": "100000"
+        },
+        "udyam": {
+            "number": "",
+            "skip": true
+        },
+        "itrAndPL": {
+            "uploadBalanceSheet": true,
+            "uploadPL": true,
+            "uploadITR": true,
+            "confirmCheckbox": true
+        },
+        "sourcing": {
+            "branch": "22 - ANDHERI",
+            "branchSearch": "andheri",
+            "ccpa": "EURE2349 - Rahul Mehta",
+            "ccpaSearch": "EURE2349"
+        },
+        "docs": {
+            "consentForm": "tests/fixtures/consent_form.png",
+            "personalDocument": "tests/fixtures/personal_doc.png"
+        }
+    }
+]

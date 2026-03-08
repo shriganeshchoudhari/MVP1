@@ -21,7 +21,7 @@ export const testConfig = {
         return `${this.baseUrl}/clouat/cloportal/#/rm-journey`;
     },
     get dashboardUrl() {
-        return `${this.baseUrl}/clouat/cloportal /# / rm - journey - queue`;
+        return `${this.baseUrl}/clouat/cloportal/#/rm-journey-queue`;
     },
 
     // ── Login Credentials ─────────────────────────────────────────────────────
