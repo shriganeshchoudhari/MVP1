@@ -1,0 +1,30 @@
+{
+  "lead": {
+    "mobileNumber": "8990909090",
+    "businessSegment": "BBG",
+    "consentType": "Physical",
+    "constitution": "SOLE PROPRIETOR"
+  },
+  "customerProfile": {
+    "panNumber": "AHMPA1234A",
+    "companyName": "CARLS MARK",
+    "pincode": "400033",
+    "city": "MUMBAI",
+    "state": "MAHARASHTRA",
+    "rmCode": "B4227"
+  },
+  "facility": {
+    "sector": "Service",
+    "facilityRequirement": "Working Capital",
+    "productType": "Cash Credit",
+    "purpose": "WORKING CAPITAL",
+    "loanAmount": "3000000",
+    "productProgram": "CGTMSE"
+  },
+  "sourcing": {
+    "dsaCode": "679063",
+    "branch": "14 - JALANDHAR",
+    "ccpa": "CCPA for Non-IPA",
+    "ltsCrmNo": "854694490"
+  }
+}

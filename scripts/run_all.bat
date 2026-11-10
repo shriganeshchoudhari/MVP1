@@ -33,7 +33,8 @@ if not exist "%ENV_FILE%" (
     exit /b 1
 )
 
-set "PW=node --env-file %ENV_FILE% node_modules\.bin\playwright test"
+set "HEADLESS=true"
+set "PW=node --env-file %ENV_FILE% node_modules\@playwright\test\cli.js test"
 
 REM ── Helper: run a suite ──────────────────────────────────────────────────────
 :run_login
@@ -45,7 +46,7 @@ goto :run_modules
 echo ──────────────────────────────────────────────────────────
 echo   Running: Login and OTP Tests
 echo ──────────────────────────────────────────────────────────
-%PW% tests\login.spec.js --reporter=html
+%PW% tests/login.spec.js --reporter=html
 if %ERRORLEVEL%==0 (
     echo   OK  Login Tests PASSED
     set /a PASS+=1
@@ -64,7 +65,7 @@ goto :run_journey
 echo ──────────────────────────────────────────────────────────
 echo   Running: Module Tests
 echo ──────────────────────────────────────────────────────────
-%PW% tests\modules\ --reporter=html
+%PW% tests/modules/ --reporter=html
 if %ERRORLEVEL%==0 (
     echo   OK  Module Tests PASSED
     set /a PASS+=1
@@ -83,7 +84,7 @@ goto :summary
 echo ──────────────────────────────────────────────────────────
 echo   Running: Full Journey Tests
 echo ──────────────────────────────────────────────────────────
-%PW% tests\journey.spec.js --reporter=html
+%PW% tests/journey.spec.js --reporter=html
 if %ERRORLEVEL%==0 (
     echo   OK  Journey Tests PASSED
     set /a PASS+=1

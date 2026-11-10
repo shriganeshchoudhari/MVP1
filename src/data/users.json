@@ -1,0 +1,26 @@
+{
+  "primaryRm": {
+    "userId": "A10773",
+    "password": "laser123",
+    "otp": "123456",
+    "businessGroup": "Working Capital",
+    "businessSegment": "BBG",
+    "role": "RELATIONSHIP_MANAGER"
+  },
+  "secondaryRm": {
+    "userId": "A15183",
+    "password": "laser123",
+    "otp": "123456",
+    "businessGroup": "Working Capital",
+    "businessSegment": "BBG",
+    "role": "RELATIONSHIP_MANAGER"
+  },
+  "creditManager": {
+    "userId": "A23429",
+    "password": "laser123",
+    "otp": "123456",
+    "businessGroup": "Working Capital",
+    "businessSegment": "BBG",
+    "role": "CREDIT_MANAGER"
+  }
+}

@@ -1,8 +1,31 @@
-
-# Playwright
+# Dependency Directories
 node_modules/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/playwright/.auth/
+
+# Environment Files
+.env
+.env.*
+!.env.example
+
+# Test Results & Reports
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+allure-results/
+allure-report/
+
+# Debugging and Output Logs
+*.log
+debug_output*.txt
+test-output*.txt
+otp-debug.txt
+page_dump.html
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# IDE Configurations
+.vscode/
+.idea/
+*.swp

@@ -1,166 +1,90 @@
-name: Playwright E2E Tests — HDFC Xpress BizFinance
+name: Playwright Enterprise Automation CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master, develop]
   pull_request:
-    branches: [ main, master ]
-  # Allow manual trigger with env selection
+    branches: [main, master, develop]
+  schedule:
+    - cron: '0 2 * * 1-5' # Scheduled regression runs Monday-Friday at 2 AM UTC
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Target environment'
+        description: 'Target Execution Environment'
         required: true
-        default: 'uat'
+        default: 'UAT'
         type: choice
-        options: [ uat, sit ]
+        options:
+          - DEV
+          - QA
+          - UAT
+          - STAGING
       suite:
-        description: 'Test suite to run'
+        description: 'Test Suite to Execute'
         required: true
-        default: 'all'
+        default: 'smoke'
         type: choice
-        options: [ all, login, modules, journey ]
+        options:
+          - smoke
+          - ui
+          - api
+          - accessibility
+          - regression
+          - all
 
 jobs:
-  # ── Login & OTP baseline tests (fast, runs first) ──────────────────────────
-  login-tests:
-    name: Login & OTP Tests
-    timeout-minutes: 15
-    runs-on: ubuntu-latest
-    env:
-      BASE_URL: ${{ github.event.inputs.environment == 'sit' && secrets.SIT_BASE_URL || secrets.UAT_BASE_URL || 'https://smeclouat.hdfcbank.com' }}
-      USER_ID: ${{ secrets.USER_ID || 'A10773' }}
-      USER_ID_1: ${{ secrets.USER_ID_1 || 'A10773' }}
-      USER_ID_2: ${{ secrets.USER_ID_2 || 'A15183' }}
-      USER_ID_3: ${{ secrets.USER_ID_3 || 'A23429' }}
-      PASSWORD: ${{ secrets.PASSWORD || 'laser123' }}
-      OTP: ${{ secrets.OTP || '123456' }}
-      BUSINESS_GROUP: ${{ secrets.BUSINESS_GROUP || 'Working Capital' }}
-      BUSINESS_SEGMENT: ${{ secrets.BUSINESS_SEGMENT || 'BBG' }}
-      HEADLESS: 'true'
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Install Playwright Chromium
-        run: npx playwright install chromium --with-deps
-
-      - name: Run Login & OTP tests
-        run: node_modules/.bin/playwright test tests/login.spec.js --reporter=html,github
-
-      - name: Upload Login Test Report
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: login-report-${{ github.run_id }}
-          path: playwright-report/
-          retention-days: 30
-
-      - name: Upload Login Test Results (on failure)
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: login-test-results-${{ github.run_id }}
-          path: test-results/
-          retention-days: 7
-
-  # ── Module-level isolated tests ─────────────────────────────────────────────
-  module-tests:
-    name: Module Tests
-    timeout-minutes: 30
-    runs-on: ubuntu-latest
-    needs: login-tests   # Only run if login tests pass
-    env:
-      BASE_URL: ${{ github.event.inputs.environment == 'sit' && secrets.SIT_BASE_URL || secrets.UAT_BASE_URL || 'https://smeclouat.hdfcbank.com' }}
-      USER_ID: ${{ secrets.USER_ID || 'A10773' }}
-      PASSWORD: ${{ secrets.PASSWORD || 'laser123' }}
-      OTP: ${{ secrets.OTP || '123456' }}
-      BUSINESS_GROUP: ${{ secrets.BUSINESS_GROUP || 'Working Capital' }}
-      BUSINESS_SEGMENT: ${{ secrets.BUSINESS_SEGMENT || 'BBG' }}
-      HEADLESS: 'true'
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Install Playwright Chromium
-        run: npx playwright install chromium --with-deps
-
-      - name: Run Module tests
-        run: node_modules/.bin/playwright test tests/modules/ --reporter=html,github
-
-      - name: Upload Module Test Report
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: module-report-${{ github.run_id }}
-          path: playwright-report/
-          retention-days: 30
-
-      - name: Upload Module Test Results (on failure)
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: module-test-results-${{ github.run_id }}
-          path: test-results/
-          retention-days: 7
-
-  # ── Full E2E journey tests (slowest — runs last) ────────────────────────────
-  journey-tests:
-    name: Full E2E Journey Tests
+  test:
+    name: Playwright Test Matrix (${{ matrix.shardIndex }}/${{ matrix.shardTotal }})
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    needs: module-tests
-    env:
-      BASE_URL: ${{ github.event.inputs.environment == 'sit' && secrets.SIT_BASE_URL || secrets.UAT_BASE_URL || 'https://smeclouat.hdfcbank.com' }}
-      USER_ID: ${{ secrets.USER_ID || 'A10773' }}
-      PASSWORD: ${{ secrets.PASSWORD || 'laser123' }}
-      OTP: ${{ secrets.OTP || '123456' }}
-      BUSINESS_GROUP: ${{ secrets.BUSINESS_GROUP || 'Working Capital' }}
-      BUSINESS_SEGMENT: ${{ secrets.BUSINESS_SEGMENT || 'BBG' }}
-      HEADLESS: 'true'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        shardIndex: [1, 2]
+        shardTotal: [2]
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js LTS
+        uses: actions/setup-node@v4
         with:
-          node-version: lts/*
-          cache: npm
+          node-version: 22
+          cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm ci
 
-      - name: Install Playwright Chromium
-        run: npx playwright install chromium --with-deps
+      - name: Validate TypeScript Compilation
+        run: npm run type-check
 
-      - name: Run Full Journey tests
-        run: node_modules/.bin/playwright test tests/journey.spec.js --reporter=html,github
+      - name: Run ESLint
+        run: npm run lint || true
 
-      - name: Upload Journey Test Report
-        uses: actions/upload-artifact@v4
+      - name: Install Playwright Browsers with OS Dependencies
+        run: npx playwright install --with-deps chromium
+
+      - name: Execute Playwright Tests
+        env:
+          ENV: ${{ github.event.inputs.environment || 'UAT' }}
+          CI: true
+        run: |
+          npx playwright test --config config/playwright.config.ts --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+
+      - name: Upload Playwright HTML & Trace Artifacts
         if: always()
-        with:
-          name: journey-report-${{ github.run_id }}
-          path: playwright-report/
-          retention-days: 30
-
-      - name: Upload Journey Traces & Screenshots (on failure)
         uses: actions/upload-artifact@v4
-        if: failure()
         with:
-          name: journey-traces-${{ github.run_id }}
-          path: test-results/
+          name: playwright-report-shard-${{ matrix.shardIndex }}
+          path: playwright-report/
+          retention-days: 14
+
+      - name: Upload Allure Results Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-shard-${{ matrix.shardIndex }}
+          path: allure-results/
           retention-days: 14

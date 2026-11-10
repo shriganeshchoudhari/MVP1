@@ -29,7 +29,6 @@ test.describe('Login Page', () => {
         await expect(page).toHaveTitle(/Xpress BizFinance|HDFC/i);
         await expect(loginPage.userIdInput).toBeVisible();
         await expect(loginPage.passwordInput).toBeVisible();
-        await expect(loginPage.businessGroupDdl).toBeVisible();
         await expect(loginPage.loginButton).toBeVisible();
     });
 
@@ -50,6 +49,9 @@ test.describe('Login Page', () => {
         const loginPage = new LoginPage(page);
         await loginPage.fillUserId(credentials.userId);
         await loginPage.fillPassword(credentials.password);
+
+        await loginPage.businessGroupDdl.waitFor({ state: 'visible', timeout: 15000 });
+
         await loginPage.selectBusinessGroup(business.group);
         await expect(loginPage.businessSegDdl).toBeVisible();
     });
@@ -73,6 +75,9 @@ test.describe('Login Page', () => {
         // Use a syntactically valid ID (e.g. A00000) so the dropdowns don't stay disabled by Angular form validators.
         await loginPage.fillUserId('A00000');
         await loginPage.fillPassword('wrongpassword');
+
+        await loginPage.businessGroupDdl.waitFor({ state: 'visible', timeout: 15000 });
+
         await loginPage.selectBusinessGroup(business.group);
         await loginPage.selectBusinessSegment(business.segment);
         await loginPage.clickLogin();

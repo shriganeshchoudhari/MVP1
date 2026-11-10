@@ -26,7 +26,6 @@ export class LoginPage {
      */
     async goto(url) {
         await this.page.goto(url);
-        await this.page.waitForLoadState('networkidle');
     }
 
     /** Fill User ID field */
@@ -88,6 +87,11 @@ export class LoginPage {
     async login({ userId, password, businessGroup, businessSegment }) {
         await this.fillUserId(userId);
         await this.fillPassword(password);
+
+        // The dropdowns appear dynamically only after UserID and Password are provided.
+        // Wait for them to attach to the DOM and become visible before interacting.
+        await this.businessGroupDdl.waitFor({ state: 'visible', timeout: 15000 });
+
         await this.selectBusinessGroup(businessGroup);
         await this.selectBusinessSegment(businessSegment);
         await this.clickLogin();
